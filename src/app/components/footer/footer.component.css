@@ -1,0 +1,14 @@
+* {
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.trace{
+  width:100%;
+  background-color:#657179;
+  height:1px;
+}
+.container-fluid {
+  background-color: #2D343A;
+  color:#657179;
+}

@@ -1,0 +1,9 @@
+* {
+  cursor: pointer;
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+}
+
