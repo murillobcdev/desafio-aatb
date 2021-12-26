@@ -1,9 +1,8 @@
 <div class="container mb-4">
-  <div class="container-square mt-4">
-
-  </div>
+  <div class="container-square mt-4"></div>
 
   <div class="container section3 d-flex">
+
     <div class="form-text p-3 pr-4 d-flex flex-column justify-content-center align-items-end">
       <div class="text-box text-center">
         <h4>LOREM IPSUM</h4>
@@ -11,8 +10,8 @@
         <h4>DOLOR SIT AMET</h4>
       </div>
     </div>
-    <div class="form-section">
 
+    <div class="form-section">
       <form method="post" [formGroup]="formularioDeUsuario" (ngSubmit)="enviarDados()">
         <div class="row">
           <div class="col px-2">
@@ -26,25 +25,24 @@
         </div>
         <div class="row mt-3">
           <div class="col-4 px-2">
-            <input type="text" class="form-control p-2" formControlName="cep" placeholder="CEP:" />
 
+            <input type="text" class="form-control p-2" placeholder="CEP" formControlName="cep" #cep=""
+              [(ngModel)]="cep.value" (blur)="consultaCep(cep.value)" />
+            <small id="cephelp" class="form-text text-muted">Apenas dígitos.</small>
           </div>
           <div class="col px-2">
-            <input type="text" class="form-control p-2" formControlName="endereco" placeholder="Endereço:" />
+            <input type="text" class="form-control p-2" formControlName="endereco" placeholder="Endereço"
+              name="endereco" />
 
           </div>
         </div>
         <div class="row mt-3">
           <div class="col px-2">
-            <input type="text" class="form-control p-2" formControlName="cidade" placeholder="Cidade:" />
+            <input type="text" class="form-control p-2" formControlName="cidade" placeholder="Cidade" />
 
           </div>
-          <div class="col px-2">
-            <select class="form-control p-2" formControlName="estado" placeholder="Estado:">
-
-              <option>Estado</option>
-
-            </select>
+          <div class="col-3 px-2">
+            <input type="text" class="form-control p-2" formControlName="estado" placeholder="UF" />
           </div>
         </div>
         <div class="row mt-3">
@@ -53,25 +51,21 @@
 
           </div>
           <div class="col-5 px-2">
-            <input type="text" class="form-control p-2" formControlName="complemento" placeholder="Complemento:" />
+            <input type="text" class="form-control p-2" formControlName="complemento" placeholder="Complemento" />
 
           </div>
         </div>
         <div class="row mt-3 px-2">
           <textarea style="resize:none;" class="form-control p-2" rows="3" formControlName="mensagem"
             placeholder="Mensagem"></textarea>
-
         </div>
         <div class="row mt-3 px-2 justify-content-end">
           <button type="submit" [disabled]="!formularioDeUsuario.valid" class="btn btn-dark py-2 px-4">Enviar</button>
-
         </div>
-        <!-- <div class="row mt-1 rounded aviso d-flex justify-content-center"
-          style="background-color:rgb(64, 235, 64);color:white;"
-          *ngIf=""
-          >
-          Olá, suas informações foram enviadas!
-        </div> -->
+        <div #aviso class="row mt-1 rounded aviso d-flex justify-content-center"
+          style="background-color:rgb(64, 235, 64);color:white;">
+          As suas informações foram enviadas!
+        </div>
       </form>
     </div>
   </div>

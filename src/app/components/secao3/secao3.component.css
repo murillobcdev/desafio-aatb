@@ -3,6 +3,16 @@
   box-sizing: border-box;
 }
 
+.aviso {
+  transition: all 0.2s ease;
+  visibility:hidden;
+}
+
+.enviado {
+  transition: all 0.2s ease;
+  visibility:visible;
+}
+
 .container-square {
   background-color: #D0D0D3;
   width: 360px;

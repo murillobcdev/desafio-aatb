@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { CepServiceService } from 'src/app/cep-service.service';
 import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
 import { Usuario } from '../form/usuario';
+// import { NgxViacepService, Endereco, CEPError, CEPErrorCode } from "@brunoc/ngx-viacep";
 
 
 @Component({
@@ -9,14 +11,41 @@ import { Usuario } from '../form/usuario';
   styleUrls: ['./secao3.component.css']
 })
 
+
 export class Secao3Component implements OnInit {
 
   formularioDeUsuario!: FormGroup;
+  @ViewChild('aviso') public aviso!: ElementRef;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private cepsService: CepServiceService,
+  ) { }
 
   ngOnInit(): void {
     this.criarFormularioDeUsuario();
+  }
+
+  consultaCep(valor: any) {
+    this.cepsService.buscar(valor).subscribe((res) => this.preencheForm(res))
+  }
+
+  formSent() {
+    this.aviso.nativeElement.classList.add('enviado')
+    setTimeout(()=>{
+      this.aviso.nativeElement.classList.remove('enviado')
+    }, 2000);
+  }
+
+  preencheForm(dados: any) {
+    // console.log(this.formularioDeUsuario.controls);
+    // this.formularioDeUsuario.patchValue(dados)
+    console.log(dados.uf)
+    this.formularioDeUsuario.patchValue({
+      endereco: dados.logradouro,
+      cidade: dados.localidade,
+      estado: dados.uf,
+    });
   }
 
   enviarDados() {
@@ -37,8 +66,7 @@ export class Secao3Component implements OnInit {
       dadosFormulario.mensagem
     );
 
-    alert(`Olá ${usuario.nome}, suas informações foram enviadas com sucesso!`);
-
+    this.formSent()
     this.formularioDeUsuario.reset();
 
   }
@@ -68,7 +96,7 @@ export class Secao3Component implements OnInit {
         Validators.compose([
           Validators.required,
           Validators.minLength(2),
-          Validators.maxLength(150)
+          Validators.maxLength(250)
         ])
       ],
     });
