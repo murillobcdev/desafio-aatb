@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "-": "^0.0.1",
     "@angular/animations": "~13.1.0",
     "@angular/common": "~13.1.0",
     "@angular/compiler": "~13.1.0",
@@ -21,7 +22,11 @@
     "@angular/router": "~13.1.0",
     "@brunoc/ngx-viacep": "^3.3.7",
     "@ng-bootstrap/ng-bootstrap": "^12.0.0-beta.4",
+    "angular": "^1.8.2",
     "bootstrap": "^4.6.0",
+    "cli": "^1.0.1",
+    "g": "^2.0.1",
+    "ghpages": "^0.0.10",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

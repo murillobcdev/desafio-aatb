@@ -11,7 +11,6 @@ import { Secao4Component } from './components/secao4/secao4.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 
-// import { NgxViacepModule } from "@brunoc/ngx-viacep";
 
 @NgModule({
   declarations: [

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CepServiceService } from 'src/app/cep-service.service';
 import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
 import { Usuario } from '../form/usuario';
-// import { NgxViacepService, Endereco, CEPError, CEPErrorCode } from "@brunoc/ngx-viacep";
 
 
 @Component({
@@ -15,6 +14,7 @@ import { Usuario } from '../form/usuario';
 export class Secao3Component implements OnInit {
 
   formularioDeUsuario!: FormGroup;
+  
   @ViewChild('aviso') public aviso!: ElementRef;
 
   constructor(
@@ -26,21 +26,21 @@ export class Secao3Component implements OnInit {
     this.criarFormularioDeUsuario();
   }
 
-  consultaCep(valor: any) {
+  consultaCep(valor: string) {
     this.cepsService.buscar(valor).subscribe((res) => this.preencheForm(res))
   }
 
   formSent() {
     this.aviso.nativeElement.classList.add('enviado')
-    setTimeout(()=>{
+    setTimeout(() => {
       this.aviso.nativeElement.classList.remove('enviado')
     }, 2000);
   }
 
   preencheForm(dados: any) {
-    // console.log(this.formularioDeUsuario.controls);
-    // this.formularioDeUsuario.patchValue(dados)
-    console.log(dados.uf)
+
+    console.log(dados)
+
     this.formularioDeUsuario.patchValue({
       endereco: dados.logradouro,
       cidade: dados.localidade,
@@ -55,6 +55,7 @@ export class Secao3Component implements OnInit {
     const dadosFormulario = this.formularioDeUsuario.value;
 
     const usuario = new Usuario(
+
       dadosFormulario.nome,
       dadosFormulario.email,
       dadosFormulario.cep,
@@ -64,9 +65,11 @@ export class Secao3Component implements OnInit {
       dadosFormulario.enderecoNumero,
       dadosFormulario.complemento,
       dadosFormulario.mensagem
+
     );
 
-    this.formSent()
+    this.formSent();
+
     this.formularioDeUsuario.reset();
 
   }
