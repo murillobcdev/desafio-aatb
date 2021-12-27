@@ -5,12 +5,12 @@
 
 .aviso {
   transition: all 0.2s ease;
-  visibility:hidden;
+  visibility: hidden;
 }
 
 .enviado {
   transition: all 0.2s ease;
-  visibility:visible;
+  visibility: visible;
 }
 
 .container-square {

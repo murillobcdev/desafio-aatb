@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { CepServiceService } from 'src/app/cep-service.service';
+import { CepServiceService } from 'src/app/services/cep/cep-service.service';
 import { FormBuilder, FormGroup, Validators } from '../../../../node_modules/@angular/forms';
-import { Usuario } from '../form/usuario';
+import { Usuario } from '../../services/form/usuario';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Usuario } from '../form/usuario';
 export class Secao3Component implements OnInit {
 
   formularioDeUsuario!: FormGroup;
-  
+
   @ViewChild('aviso') public aviso!: ElementRef;
 
   constructor(
@@ -27,7 +27,9 @@ export class Secao3Component implements OnInit {
   }
 
   consultaCep(valor: string) {
-    this.cepsService.buscar(valor).subscribe((res) => this.preencheForm(res))
+    if (valor.length == 8) {
+      this.cepsService.buscar(valor).subscribe((res) => this.preencheForm(res))
+    }
   }
 
   formSent() {
@@ -84,20 +86,29 @@ export class Secao3Component implements OnInit {
           Validators.maxLength(100)
         ])
       ],
-      email: ['', Validators.compose([Validators.email])],
-      cep: ['', Validators.compose([Validators.required, Validators.maxLength(13)])],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      cep: ['',
+        Validators.compose([
+          Validators.required,
+          Validators.maxLength(8),
+          Validators.minLength(8)]),
+
+      ],
       endereco: ['', Validators.compose([Validators.required])],
       cidade: ['', Validators.compose([Validators.required])],
-      estado: ['', Validators.compose([Validators.required])],
+      estado: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(2)
+      ])],
       enderecoNumero: ['', Validators.compose([
         Validators.required,
         Validators.minLength(1),
-        Validators.maxLength(5)])],
+        Validators.maxLength(6)])],
       complemento: [''],
       mensagem: [
         '',
         Validators.compose([
-          Validators.required,
           Validators.minLength(2),
           Validators.maxLength(250)
         ])
